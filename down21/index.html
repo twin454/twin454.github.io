@@ -25,7 +25,7 @@
     <button id="divideButton3" type="button" class="btn btn-outline-primary">&divide 3</button>
     <button id="divideButton5" type="button" class="btn btn-outline-primary">&divide 5</button>
     <button id="squareRoot" type="button" class="btn btn-outline-primary">Square Root</button>
-    <button id="shuffle" type="button" class="btn btn-outline-primary">Shuffle</button>
+    <button id="flip" type="button" class="btn btn-outline-primary">flip</button>
 </div>
 <br/>
 <div class="skill">
@@ -55,7 +55,7 @@
     const remove7 = document.getElementById("remove7");
     const squareRoot = document.getElementById("squareRoot");
     const randomRemove = document.getElementById("randomRemove");
-    const shuffle = document.getElementById("shuffle");
+    const flip = document.getElementById("flip");
     const again = document.getElementById("again");
     const message = document.getElementById("message");
 
@@ -87,7 +87,7 @@
             remove7.disabled = true;
             squareRoot.disabled = true;
             randomRemove.disabled = true;
-            shuffle.disabled = true;
+            flip.disabled = true;
         }
     }
 
@@ -159,15 +159,11 @@
         }
     });
 
-    shuffle.addEventListener("click", function() {
+    flip.addEventListener("click", function() {
         let s = currentNumber.toString();
         let n = new Set(s).size;
         if (n > 1) {
-            let arr = s.split('').sort(()=>Math.random()-.5).join('');
-            while (s === arr) {
-                arr = s.split('').sort(()=>Math.random()-.5).join('');
-            }
-            s = arr;
+            s = s.split("").reverse().join("");
             currentNumber = parseInt(s);
             steps--;
             updateDisplay();
@@ -222,7 +218,7 @@
         remove7.disabled = false;
         squareRoot.disabled = false;
         randomRemove.disabled = false;
-        shuffle.disabled = false;
+        flip.disabled = false;
         message.textContent = "Let's try again!";
     });
 
