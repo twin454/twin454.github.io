@@ -1,7 +1,232 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+    
+    <title>Down to 1!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/games/styles.css">
+    
+</head>
+
 <body>
-<h1>game page</h1>
-<p>I'm hosted with GitHub Pages!</p>
+<h2>Reduce <span style="color: #8B8000">this Number</span> to 1 (in 10 steps)</h2>
+<div>
+    <h1 id="numberDisplay" style="color:#8B8000;">100</h1>
+    <h3 id="numberSteps">10</h3>
+</div>
+<br/>
+<div class="skill">
+    <button id="addButton" type="button" class="btn btn-outline-primary">+ 1</button>
+    <button id="subtractButton" type="button" class="btn btn-outline-primary">- 1</button>
+    <button id="divideButton2" type="button" class="btn btn-outline-primary">&divide 2</button>
+    <button id="divideButton3" type="button" class="btn btn-outline-primary">&divide 3</button>
+    <button id="divideButton5" type="button" class="btn btn-outline-primary">&divide 5</button>
+    <button id="squareRoot" type="button" class="btn btn-outline-primary">Square Root</button>
+    <button id="shuffle" type="button" class="btn btn-outline-primary">Shuffle</button>
+</div>
+<br/>
+<div class="skill">
+    <button id="remove7" type="button" class="btn btn-outline-success">Remove 7</button>
+    <button id="randomRemove" type="button" class="btn btn-outline-success">Random Remove</button>
+</div>
+<br/>
+<div class="skill">
+    <button id="again" type="button" class="btn btn-outline-secondary">again</button>
+</div>
+<br/>
+<h3 class="message" id="message">Let's go!</h3>
 </body>
+
+<script>
+    let maxNumber = 100000;  // maximum number
+    let currentNumber = Math.floor(Math.random() * maxNumber);  // Initial number
+    let steps = 10;  // Initial number
+    let winStreak = 0;
+    const numberDisplay = document.getElementById("numberDisplay");
+    const numberSteps = document.getElementById("numberSteps");
+    const addButton = document.getElementById("addButton");
+    const subtractButton = document.getElementById("subtractButton");
+    const divideButton2 = document.getElementById("divideButton2");
+    const divideButton3 = document.getElementById("divideButton3");
+    const divideButton5 = document.getElementById("divideButton5");
+    const remove7 = document.getElementById("remove7");
+    const squareRoot = document.getElementById("squareRoot");
+    const randomRemove = document.getElementById("randomRemove");
+    const shuffle = document.getElementById("shuffle");
+    const again = document.getElementById("again");
+    const message = document.getElementById("message");
+
+    // Update the display of the current number
+    function updateDisplay() {
+        numberDisplay.textContent = currentNumber;
+        numberSteps.textContent = steps + " steps left.";
+    }
+
+    // Check if the game is over
+    function checkGameOver() {
+        if (currentNumber === 1 || steps === 0) {
+            if (currentNumber === 1) {
+                winStreak++;
+                if (winStreak === 1) {
+                    message.textContent = "Congratulations! You've reduced the number to 1!";
+                } else {
+                    message.textContent = "Congratulations! You've " + winStreak + " win streak!";
+                }
+            } else {
+                winStreak = 0;
+                message.textContent = "You lose! Let's try again!";
+            }
+            addButton.disabled = true;
+            subtractButton.disabled = true;
+            divideButton2.disabled = true;
+            divideButton3.disabled = true;
+            divideButton5.disabled = true;
+            remove7.disabled = true;
+            squareRoot.disabled = true;
+            randomRemove.disabled = true;
+            shuffle.disabled = true;
+        }
+    }
+
+    // Add 1 to the number
+    addButton.addEventListener("click", function() {
+        currentNumber++;
+        steps--;
+        updateDisplay();
+        checkGameOver();
+    });
+
+    // Subtract 1 from the number
+    subtractButton.addEventListener("click", function() {
+        if (currentNumber > 1) {
+            currentNumber--;
+            steps--;
+            updateDisplay();
+            checkGameOver();
+        } else {
+            message.textContent = "Can not go negative!";
+        }
+    });
+
+    // Divide the number by 2 if it's even
+    divideButton2.addEventListener("click", function() {
+        if (currentNumber % 2 === 0) {
+            currentNumber /= 2;
+            steps--;
+            updateDisplay();
+            checkGameOver();
+        } else {
+            message.textContent = "Can only divide by 2 if the number is even!";
+        }
+    });
+
+    // Divide the number by 3 if it's divisible
+    divideButton3.addEventListener("click", function() {
+        if (currentNumber % 3 === 0) {
+            currentNumber /= 3;
+            steps--;
+            updateDisplay();
+            checkGameOver();
+        } else {
+            message.textContent = "Can not be divided by 3!";
+        }
+    });
+
+    // Divide the number by 5 if it's divisible
+    divideButton5.addEventListener("click", function() {
+        if (currentNumber % 5 === 0) {
+            currentNumber /= 5;
+            steps--;
+            updateDisplay();
+            checkGameOver();
+        } else {
+            message.textContent = "Can not be divided by 5!";
+        }
+    });
+
+    squareRoot.addEventListener("click", function() {
+        const root = Math.sqrt(currentNumber);
+        if (root === Math.floor(root)) {
+            currentNumber = root;
+            steps--;
+            updateDisplay();
+            checkGameOver();
+        } else {
+            message.textContent = "Can not take square root!";
+        }
+    });
+
+    shuffle.addEventListener("click", function() {
+        let s = currentNumber.toString();
+        let n = new Set(s).size;
+        if (n > 1) {
+            let arr = s.split('').sort(()=>Math.random()-.5).join('');
+            while (s === arr) {
+                arr = s.split('').sort(()=>Math.random()-.5).join('');
+            }
+            s = arr;
+            currentNumber = parseInt(s);
+            steps--;
+            updateDisplay();
+            checkGameOver();
+        } else {
+            message.textContent = "They are the same!";
+        }
+    });
+
+    remove7.addEventListener("click", function() {
+        let s = currentNumber.toString();
+        s = s.replace(/7/g, "");
+        if (s === "") {
+            s = "0"
+        }
+        currentNumber = parseInt(s);
+        steps--;
+        remove7.disabled = true;
+        updateDisplay();
+        checkGameOver();
+    });
+
+    randomRemove.addEventListener("click", function() {
+        let s = currentNumber.toString();
+        let n = s.length;
+        if (n > 1) {
+            let index = Math.floor(Math.random() * n);
+            let c = s[index]
+            s = s.slice(0, index) + s.slice(index + 1)
+            currentNumber = parseInt(s);
+            steps--;
+            randomRemove.disabled = true;
+            updateDisplay();
+            checkGameOver();
+        } else {
+            message.textContent = "Can not remove the only digit";
+        }
+    });
+
+    again.addEventListener("click", function() {
+        if (currentNumber !== 1) {
+            winStreak = 0;
+        }
+        currentNumber = Math.floor(Math.random() * maxNumber);
+        steps = 10;
+        updateDisplay();
+        addButton.disabled = false;
+        subtractButton.disabled = false;
+        divideButton2.disabled = false;
+        divideButton3.disabled = false;
+        divideButton5.disabled = false;
+        remove7.disabled = false;
+        squareRoot.disabled = false;
+        randomRemove.disabled = false;
+        shuffle.disabled = false;
+        message.textContent = "Let's try again!";
+    });
+
+    // Initialize the game
+    updateDisplay();
+</script>
 </html>
