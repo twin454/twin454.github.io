@@ -37,7 +37,7 @@
         // Initialize the puzzle
         function initPuzzle() {
             puzzle = [];
-            var bible = JSON.parse(JSON.stringify(loadJsonFile('圣经和合本.json')));
+            var bible = loadJsonFile('圣经和合本.json');
             verse = bible["创世记"]["1"]["1"];
             for (let i = 0; i < size * size; i++) {
                 if (i === emptyIndex) {
