@@ -146,13 +146,13 @@
             initPuzzle(); // Re-initialize the puzzle
         }
 
-        async function loadJSON(filePath) {
+        function loadJSON(filePath) {
             try {
-                const response = await fetch(filePath);  // Fetch the file
+                const response = fetch(filePath);  // Fetch the file
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                bible = await response.json();  // Parse and store the JSON data in the global variable
+                bible = response.json();  // Parse and store the JSON data in the global variable
                 console.log('JSON data loaded successfully:', bible);
             } catch (error) {
                 console.error('There was a problem with the fetch operation:', error);
