@@ -1,0 +1,113 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Title */
+h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Puzzle Container */
+.puzzle-container {
+    margin: 0 auto;
+    display: grid;
+    gap: 5px;
+    border: 2px solid #ccc;
+    transition: grid-template-columns 0.3s ease, grid-template-rows 0.3s ease;
+    background-color: #ffffff;
+}
+
+/* Puzzle Pieces */
+.puzzle-piece {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ececec;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.puzzle-piece:hover {
+    background-color: #ddd;
+}
+
+.empty {
+    background-color: #fff;
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+    .puzzle-container {
+        width: 90%;
+    }
+
+    .puzzle-piece {
+        font-size: 1rem;
+        height: 80px;
+        width: 80px;
+    }
+}
+
+@media (min-width: 577px) {
+    .puzzle-container {
+        width: 60%;
+    }
+
+    .puzzle-piece {
+        font-size: 1.5rem;
+        height: 100px;
+        width: 100px;
+    }
+}
+
+/* Button Styles */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    background-color: #004085;
+}
+
+/* Grid Size Input */
+input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

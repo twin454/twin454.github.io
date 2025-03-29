@@ -3,11 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Puzzle</title>
+
+    <!-- Bootstrap CSS for responsive design -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+    <h1>Sliding Puzzle Game</h1>
+    <div>
+        <label for="size">Grid Size (3 to 5): </label>
+        <input type="number" id="size" min="3" max="5" value="3" onchange="updateSize()">
+    </div>
+    <div class="puzzle-container" id="puzzle-container"></div>
+    <button onclick="shufflePuzzle()">Shuffle</button>
+
+    <!-- jQuery and Bootstrap JS (for Bootstrap components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Puzzle Game JavaScript -->
+    <script>
+        let size = 3; // Default grid size
+        let puzzle = [];
+        let emptyIndex = size * size - 1; // The index of the empty space (bottom-right corner)
+
+        // Initialize the puzzle
+        function initPuzzle() {
+            puzzle = [];
+            for (let i = 0; i < size * size; i++) {
+                if (i === emptyIndex) {
+                    puzzle.push(null); // Empty space
+                } else {
+                    puzzle.push(i + 1); // Puzzle pieces are numbered from 1 to 8
+                }
+            }
+            renderPuzzle();
+        }
+
+        // Render the puzzle
+        function renderPuzzle() {
+            const container = document.getElementById('puzzle-container');
+            container.innerHTML = ''; // Clear the container
+
+            // Update grid template dynamically
+            container.style.gridTemplateColumns = `repeat(${size}, 100px)`;
+            container.style.gridTemplateRows = `repeat(${size}, 100px)`;
+
+            puzzle.forEach((piece, index) => {
+                const tile = document.createElement('div');
+                tile.classList.add('puzzle-piece');
+                
+                if (piece === null) {
+                    tile.classList.add('empty');
+                } else {
+                    tile.textContent = piece;
+                    tile.addEventListener('click', () => moveTile(index));
+                }
+
+                container.appendChild(tile);
+            });
+        }
+
+        // Move the clicked tile if it's adjacent to the empty space
+        function moveTile(index) {
+            const [row, col] = [Math.floor(index / size), index % size];
+            const [emptyRow, emptyCol] = [Math.floor(emptyIndex / size), emptyIndex % size];
+
+            const isAdjacent = 
+                (Math.abs(row - emptyRow) === 1 && col === emptyCol) || 
+                (Math.abs(col - emptyCol) === 1 && row === emptyRow);
+
+            if (isAdjacent) {
+                puzzle[emptyIndex] = puzzle[index];
+                puzzle[index] = null;
+                emptyIndex = index;
+                renderPuzzle();
+            }
+        }
+
+        // Shuffle the puzzle while ensuring solvability
+        function shufflePuzzle() {
+            let solvedPuzzle = Array.from({ length: size * size }, (_, i) => i === size * size - 1 ? null : i + 1);
+            puzzle = [...solvedPuzzle]; // Copy the solved puzzle to shuffle
+            emptyIndex = size * size - 1; // Empty space is at the bottom-right corner initially
+
+            let moveCount = 0;
+
+            // Perform a sequence of moves to shuffle the puzzle
+            while (moveCount < 1000) {
+                // Get random valid adjacent moves
+                const validMoves = getValidMoves(emptyIndex);
+                
+                // Pick a random valid move
+                const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+
+                // Swap the empty space with the selected tile
+                puzzle[emptyIndex] = puzzle[randomMove];
+                puzzle[randomMove] = null;
+                emptyIndex = randomMove; // Update empty space position
+
+                moveCount++;
+
+                // Optionally, ensure the puzzle is solvable after a shuffle
+                if (moveCount === 1000) {
+                    renderPuzzle();
+                }
+            }
+        }
+
+        // Get the valid moves for the empty space (adjacent tiles)
+        function getValidMoves(emptyIndex) {
+            const validMoves = [];
+            const [row, col] = [Math.floor(emptyIndex / size), emptyIndex % size];
+            
+            // Check the four possible directions (up, down, left, right)
+            if (row > 0) validMoves.push(emptyIndex - size); // Move up
+            if (row < size - 1) validMoves.push(emptyIndex + size); // Move down
+            if (col > 0) validMoves.push(emptyIndex - 1); // Move left
+            if (col < size - 1) validMoves.push(emptyIndex + 1); // Move right
+
+            return validMoves;
+        }
+
+        // Update the puzzle size dynamically when user changes the input
+        function updateSize() {
+            const newSize = document.getElementById('size').value;
+            size = parseInt(newSize);
+
+            emptyIndex = size * size - 1; // Reset emptyIndex for the new grid size
+            initPuzzle(); // Re-initialize the puzzle
+        }
+
+        // Initialize the puzzle when the page loads
+        window.onload = initPuzzle;
+
+    </script>
+</body>
+</html>
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load JSON File Example</title>
 </head>
 <body>
     <h1>Loaded Data from JSON File</h1>
-    <pre id="output"></pre> <!-- Placeholder for displaying JSON data -->
+    <pre id="output"></pre> 
 
     <script>
         // Function to load JSON data using fetch()
@@ -39,3 +192,4 @@
     </script>
 </body>
 </html>
+-->
