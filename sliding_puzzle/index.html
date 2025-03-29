@@ -40,9 +40,9 @@
         function initPuzzle() {
             puzzle = [];
             bible = loadJsonFile('圣经和合本.json');
-            verse = bible["创世记"]["1"]["1"];
             const label = document.getElementById('myLabel');
-            label.textContent = bible;
+            label.textContent = Object.keys(bible["创世记"]);
+            verse = bible["创世记"]["1"]["1"];
             for (let i = 0; i < size * size; i++) {
                 if (i === emptyIndex) {
                     puzzle.push(null); // Empty space
