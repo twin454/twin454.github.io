@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="styles.css">
 
 </head>
+
 <body>
 
     <h1>Sliding Puzzle Game</h1>
@@ -32,12 +34,13 @@
         let size = 3; // Default grid size
         let puzzle = [];
         let emptyIndex = size * size - 1; // The index of the empty space (bottom-right corner)
+        let bible = {};
         let verse = "";
 
         // Initialize the puzzle
         function initPuzzle() {
             puzzle = [];
-            var bible = loadJsonFile('圣经和合本.json');
+            loadJsonFile('圣经和合本.json');
             verse = bible["创世记"]["1"]["1"];
             for (let i = 0; i < size * size; i++) {
                 if (i === emptyIndex) {
@@ -61,7 +64,7 @@
             puzzle.forEach((piece, index) => {
                 const tile = document.createElement('div');
                 tile.classList.add('puzzle-piece');
-                
+
                 if (piece === null) {
                     tile.classList.add('empty');
                 } else {
@@ -78,8 +81,8 @@
             const [row, col] = [Math.floor(index / size), index % size];
             const [emptyRow, emptyCol] = [Math.floor(emptyIndex / size), emptyIndex % size];
 
-            const isAdjacent = 
-                (Math.abs(row - emptyRow) === 1 && col === emptyCol) || 
+            const isAdjacent =
+                (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
                 (Math.abs(col - emptyCol) === 1 && row === emptyRow);
 
             if (isAdjacent) {
@@ -102,7 +105,7 @@
             while (moveCount < 1000) {
                 // Get random valid adjacent moves
                 const validMoves = getValidMoves(emptyIndex);
-                
+
                 // Pick a random valid move
                 const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
 
@@ -124,7 +127,7 @@
         function getValidMoves(emptyIndex) {
             const validMoves = [];
             const [row, col] = [Math.floor(emptyIndex / size), emptyIndex % size];
-            
+
             // Check the four possible directions (up, down, left, right)
             if (row > 0) validMoves.push(emptyIndex - size); // Move up
             if (row < size - 1) validMoves.push(emptyIndex + size); // Move down
@@ -143,20 +146,17 @@
             initPuzzle(); // Re-initialize the puzzle
         }
 
-        function loadJsonFile(filePath) {
-            return fetch(filePath)  // Fetch the JSON file
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to load JSON file');
-                    }
-                    return response.json();  // Parse the JSON file
-                })
-                .then(data => {
-                    return data;  // Return the parsed data as a dictionary
-                })
-                .catch(error => {
-                    console.error('Error loading JSON file:', error);
-                });
+        async function loadJSON(filePath) {
+            try {
+                const response = await fetch(filePath);  // Fetch the file
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                bible = await response.json();  // Parse and store the JSON data in the global variable
+                console.log('JSON data loaded successfully:', bible);
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
         }
 
         // Initialize the puzzle when the page loads
@@ -164,4 +164,5 @@
 
     </script>
 </body>
+
 </html>
