@@ -38,12 +38,8 @@
         // Initialize the puzzle
         function initPuzzle() {
             puzzle = [];
-            bible = loadJsonFile('圣经和合本.json');
-            console.log(bible); 
-            console.log(bible["创世记"]); 
-            console.log(bible["创世记"]["1"]); 
-            console.log(bible["创世记"]["1"]["1"]); 
-            verse = "神说，地要发生青草，和结种子的菜蔬，并结果子的树木，各从其类，果子都包着核。事就这样成了。" //bible["创世记"]["1"]["1"];
+            bible = JSON.parse(JSON.stringify(loadJsonFile('圣经和合本.json')));
+            verse = bible["创世记"]["1"]["1"];
             for (let i = 0; i < size * size; i++) {
                 if (i === emptyIndex) {
                     puzzle.push(null); // Empty space
