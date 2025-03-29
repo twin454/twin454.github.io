@@ -39,7 +39,7 @@
         function initPuzzle() {
             puzzle = [];
             bible = loadJsonFile('./圣经和合本.json');
-            verse = bible["创世记"][1][1];
+            verse = bible["创世记"]["1"]["1"];
             for (let i = 0; i < size * size; i++) {
                 if (i === emptyIndex) {
                     puzzle.push(null); // Empty space
@@ -93,7 +93,7 @@
 
         // Shuffle the puzzle while ensuring solvability
         function shufflePuzzle() {
-            let solvedPuzzle = Array.from({ length: size * size }, (_, i) => i === size * size - 1 ? null : i + 1);
+            let solvedPuzzle = Array.from({ length: size * size }, (_, i) => i === size * size - 1 ? null : verse[i]);
             puzzle = [...solvedPuzzle]; // Copy the solved puzzle to shuffle
             emptyIndex = size * size - 1; // Empty space is at the bottom-right corner initially
 
