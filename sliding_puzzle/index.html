@@ -41,7 +41,7 @@
             puzzle = [];
             bible = loadJsonFile('圣经和合本.json');
             const label = document.getElementById('myLabel');
-            label.textContent = Object.keys(bible["创世记"]);
+            label.textContent = Object.keys(bible);
             verse = bible["创世记"]["1"]["1"];
             for (let i = 0; i < size * size; i++) {
                 if (i === emptyIndex) {
