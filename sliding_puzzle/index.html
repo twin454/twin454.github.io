@@ -32,15 +32,19 @@
         let size = 3; // Default grid size
         let puzzle = [];
         let emptyIndex = size * size - 1; // The index of the empty space (bottom-right corner)
+        let bible = {};
+        let verse = "";
 
         // Initialize the puzzle
         function initPuzzle() {
             puzzle = [];
+            bible = loadJsonFile('./圣经和合本.json');
+            verse = bible["创世记"][1][1];
             for (let i = 0; i < size * size; i++) {
                 if (i === emptyIndex) {
                     puzzle.push(null); // Empty space
                 } else {
-                    puzzle.push(i + 1); // Puzzle pieces are numbered from 1 to 8
+                    puzzle.push(verse[i]); // Puzzle pieces are numbered from 1 to 8
                 }
             }
             renderPuzzle();
@@ -140,56 +144,25 @@
             initPuzzle(); // Re-initialize the puzzle
         }
 
+        function loadJsonFile(filePath) {
+            return fetch(filePath)  // Fetch the JSON file
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load JSON file');
+                    }
+                    return response.json();  // Parse the JSON file
+                })
+                .then(data => {
+                    return data;  // Return the parsed data as a dictionary
+                })
+                .catch(error => {
+                    console.error('Error loading JSON file:', error);
+                });
+        }
+
         // Initialize the puzzle when the page loads
         window.onload = initPuzzle;
 
     </script>
 </body>
 </html>
-
-
-
-
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Load JSON File Example</title>
-</head>
-<body>
-    <h1>Loaded Data from JSON File</h1>
-    <pre id="output"></pre> 
-
-    <script>
-        // Function to load JSON data using fetch()
-        function loadJSON() {
-            // Fetch the JSON file from the server or local path
-            fetch('./圣经和合本.json') // Replace 'data.json' with your JSON file path
-                .then(response => {
-                    // Check if the response is OK (status code 200-299)
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    // Parse the response as JSON
-                    return response.json();
-                })
-                .then(data => {
-                    // Log the JSON data to the console
-                    console.log(data);
-
-                    // Display the JSON data on the webpage
-                    document.getElementById('output').textContent = JSON.stringify(data, null, 2);
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        }
-
-        // Load JSON when the page loads
-        window.onload = loadJSON;
-    </script>
-</body>
-</html>
--->
