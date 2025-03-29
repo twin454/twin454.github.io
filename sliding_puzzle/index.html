@@ -19,7 +19,6 @@
         <label for="size">Grid Size (3 to 5): </label>
         <input type="number" id="size" min="3" max="5" value="3" onchange="updateSize()">
     </div>
-    <label id="myLabel">Old Label</label>
     <div class="puzzle-container" id="puzzle-container"></div>
     <button onclick="shufflePuzzle()">Shuffle</button>
 
@@ -40,8 +39,6 @@
         function initPuzzle() {
             puzzle = [];
             bible = loadJsonFile('圣经和合本.json');
-            const label = document.getElementById('myLabel');
-            label.textContent = Object.keys(bible);
             verse = bible["创世记"]["1"]["1"];
             for (let i = 0; i < size * size; i++) {
                 if (i === emptyIndex) {
@@ -157,6 +154,9 @@
                 })
                 .then(data => {
                     console.log(data); 
+                    console.log(Object.keys(data)); 
+                    console.log(data["创世记"]); 
+                    console.log(Object.keys(data["创世记"])); 
                     return data;  // Return the parsed data as a dictionary
                 })
                 .catch(error => {
