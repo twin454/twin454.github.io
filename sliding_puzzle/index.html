@@ -18,8 +18,8 @@
 
     <h1>Sliding Puzzle Game</h1>
     <div>
-        <label for="size">Grid Size (3 to 5): </label>
-        <input type="number" id="size" min="3" max="5" value="3" onchange="updateSize()">
+        <label for="size">Grid Size (3 to 50): </label>
+        <input type="number" id="size" min="3" max="50" value="3" onchange="updateSize()">
     </div>
     <div class="puzzle-container" id="puzzle-container"></div>
     <button onclick="shufflePuzzle()">Shuffle</button>
@@ -40,7 +40,6 @@
         // Initialize the puzzle
         function initPuzzle() {
             puzzle = [];
-            loadJSON('圣经和合本.json');
             verse = bible["创世记"]["1"]["1"];
             for (let i = 0; i < size * size; i++) {
                 if (i === emptyIndex) {
@@ -160,7 +159,10 @@
         }
 
         // Initialize the puzzle when the page loads
-        window.onload = initPuzzle;
+        document.addEventListener("DOMContentLoaded", async () => {
+            await loadJSON('圣经和合本.json');
+            initPuzzle();
+        });
 
     </script>
 </body>
