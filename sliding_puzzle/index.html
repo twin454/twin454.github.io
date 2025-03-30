@@ -34,8 +34,8 @@
         let size = 3; // Default grid size
         let puzzle = [];
         let emptyIndex = size * size - 1; // The index of the empty space (bottom-right corner)
-        let bible = {};
-        let verse = "";
+        let bible;
+        let verse;
 
         // Initialize the puzzle
         function initPuzzle() {
@@ -145,13 +145,13 @@
             initPuzzle(); // Re-initialize the puzzle
         }
 
-        async function loadJSON(filePath) {
+        function loadJSON(filePath) {
             try {
-                const response = await fetch(filePath);  // Fetch the file
+                const response = fetch(filePath);  // Fetch the file
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                bible = await response.json();  // Parse and store the JSON data in the global variable
+                bible = response.json();  // Parse and store the JSON data in the global variable
                 console.log('JSON data loaded successfully:', bible);
             } catch (error) {
                 console.error('There was a problem with the fetch operation:', error);
