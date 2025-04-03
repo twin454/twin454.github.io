@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Detail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <img src="https://via.placeholder.com/150" alt="Person's Photo">
+    <h1>Document Details</h1>
+</header>
+
+<main>
+    <div id="documentDetail">
+        <!-- Document details will be displayed here -->
+    </div>
+</main>
+
+<script>
+// Fetch the document based on the ID from the URL query string
+async function fetchDocumentDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const documentId = parseInt(urlParams.get('id'));
+
+    if (isNaN(documentId)) {
+        document.getElementById('documentDetail').innerHTML = "<p>Invalid document ID.</p>";
+        return;
+    }
+
+    try {
+        const response = await fetch(`data/document${documentId}.json`);  // Fetch the specific document's JSON file
+        if (!response.ok) {
+            throw new Error('Document not found');
+        }
+        const doc = await response.json();  // Parse the JSON data
+
+        // Render the document details
+        const documentDetail = document.getElementById('documentDetail');
+        documentDetail.innerHTML = `
+            <h2>${doc.title}</h2>
+            <p><strong>Published on:</strong> ${doc.date}</p>
+            <p><strong>Description:</strong> ${doc.description}</p>
+            <div>
+                <h3>Content</h3>
+                <p>${doc.content}</p>
+            </div>
+        `;
+    } catch (error) {
+        document.getElementById('documentDetail').innerHTML = `<p>Error: ${error.message}</p>`;
+    }
+}
+
+// Call the function to fetch and display the document details
+fetchDocumentDetails();
+</script>
+
+</body>
+</html>
