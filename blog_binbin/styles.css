@@ -1,75 +1,140 @@
+/* General Styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #EAEFF5;  /* Soft Gray-Blue */
+    color: #333;  /* Dark Gray */
 }
+
+/* Header Styling */
 header {
-    background-color: #FF6F61;
+    background-color: #4A90E2;  /* Cool Blue */
     color: white;
     padding: 20px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    flex-wrap: wrap;
 }
+
+/* Header Image */
 header img {
-    position: absolute;
-    top: 20px;
-    left: 200px;
-    width: 150px; /* Adjust size as needed */
-    height: 110px;
+    width: 30%;
+    max-width: 150px;
+    height: auto;
     border-radius: 10%;
-    border: 3px solid white; /* Optional: add border around image */
+    border: 3px solid white;
+    margin-right: 20px;
 }
+
+/* Header Text */
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+header p {
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+/* Main Content */
 main {
     padding: 20px;
 }
+
+/* Document List */
 .document-list {
     list-style-type: none;
     padding: 0;
 }
+
 .document-item {
-    background-color: white;
+    background-color: #FFFFFF;  /* White */
     margin: 10px 0;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* Document Title */
 .document-item h2 {
     margin: 0;
-    color: #FF6F61;
+    color: #4A90E2;  /* Cool Blue */
 }
+
+/* Document Text */
 .document-item p {
     font-size: 14px;
     color: #555;
 }
+
+/* Links */
 .document-item a {
     text-decoration: none;
-    color: #007BFF;
+    color: #FFB400;  /* Warm Yellow */
     font-weight: bold;
 }
+
 .document-item a:hover {
     text-decoration: underline;
 }
+
+/* Pagination */
 .pagination {
     text-align: center;
     margin-top: 20px;
 }
+
 .pagination button, .pagination select {
     padding: 10px 15px;
     margin: 0 5px;
-    background-color: #FF6F61;
+    background-color: #4A90E2;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+
 .pagination button:disabled, .pagination select:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
-select {
-    background-color: #f9f9f9;
-    color: #333;
-    border: 1px solid #ccc;
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 10px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header img {
+        width: 50%;
+        max-width: 120px;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    header p {
+        font-size: 1em;
+    }
+
+    .document-item {
+        padding: 10px;
+    }
+
+    .document-item h2 {
+        font-size: 1.2em;
+    }
+
+    .document-item p {
+        font-size: 13px;
+    }
 }

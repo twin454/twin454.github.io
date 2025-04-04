@@ -36,6 +36,11 @@ h2 {
 }
 
 /* Section for game descriptions */
+.games, .blog {
+    margin-bottom: 40px; /* Space between sections */
+}
+
+/* Each individual game section */
 .game-sections {
     display: flex;
     justify-content: space-between;
@@ -43,7 +48,7 @@ h2 {
     flex-wrap: wrap;  /* Ensure it wraps on smaller screens */
 }
 
-/* Each individual game section */
+/* Each individual section like game or blog */
 .game-section {
     background-color: #ffffff;
     border-radius: 8px;
@@ -54,7 +59,7 @@ h2 {
     text-align: left;
 }
 
-/* Game section title */
+/* Section title styling */
 .game-section h3 {
     font-size: 1.5em;
     color: #2c3e50;
