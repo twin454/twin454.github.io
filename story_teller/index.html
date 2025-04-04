@@ -12,21 +12,18 @@
 <body>
 
     <header>
-        <h1>Random Bible Verses</h1>
+        <h1>Story teller</h1>
     </header>
 
     <main>
         <div id="verse-selection">
             <label for="verse-count">Select number of verses: </label>
-            <select id="verse-count">
-                <option value="3">3 Verses</option>
-                <option value="5">5 Verses</option>
-            </select>
+            <input type="number" id="verse-count" value="3" min="1" max="10" />
             <button id="load-verses">Load Verses</button>
         </div>
 
         <div id="verse-list">
-            <h2>Today's Bible Verses:</h2>
+            <h2>Tell a story based on these verses:</h2>
             <ul id="bible-verses">
                 <!-- Random Bible Verses will be inserted here -->
             </ul>
