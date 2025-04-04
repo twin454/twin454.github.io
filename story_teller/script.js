@@ -42,7 +42,7 @@ async function displayRandomVerses() {
         const random_chapter_index = Math.floor(Math.random() * chapter_list.length);
         const random_chapter = chapter_list[random_chapter_index];
 
-        const random_verse = Math.floor(Math.random() * catalog[random_book][random_chapter]).toString();
+        const random_verse = Math.floor(Math.random() * catalog[random_book][random_chapter] + 1).toString();
         verse = await loadBibleVerse(random_book, random_chapter, random_verse);
         if (!selectedVerses.includes(verse)) {
             selectedVerses.push(verse);
