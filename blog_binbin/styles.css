@@ -29,12 +29,21 @@ header img {
     margin-right: 20px;
 }
 
-/* Header Text */
+/* Header Text (Ensure vertical stacking of text) */
+header div {
+    display: flex;
+    flex-direction: column;  /* Stack the text vertically */
+    justify-content: center; /* Center the text vertically */
+    align-items: center;     /* Center the text horizontally */
+}
+
+/* Header Title */
 header h1 {
     margin: 0;
     font-size: 2em;
 }
 
+/* Header Paragraph */
 header p {
     font-size: 1.2em;
     margin-top: 5px;
