@@ -1,0 +1,96 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+main {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#verse-selection {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#verse-selection label {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+#verse-selection select {
+    font-size: 1em;
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+#verse-selection button {
+    font-size: 1em;
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#verse-selection button:hover {
+    background-color: #45a049;
+}
+
+#verse-list {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    font-size: 1.2em;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+}
