@@ -55,7 +55,7 @@ async function fetchDocuments() {
             const li = document.createElement('li');
             li.className = 'document-item';
             li.innerHTML = `
-                <h2><a href="detail.html?id=${metadata.id}">${metadata.title}</a></h2>
+                <h2><a href="detail.html?id=${id}">${metadata.title}</a></h2>
                 <p><strong>Published on:</strong> ${metadata.date}</p>
                 <p>${metadata.description}</p>
             `;
