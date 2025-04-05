@@ -34,20 +34,20 @@ async function fetchDocuments() {
     
     for (const id of documentIds) {
         try {
-            const response = await fetch(`data/document${id}.json`);  // Fetch each document's JSON file
-            const doc = await response.json();  // Parse the JSON data
+            const response = await fetch(`data/metadata/${id}.json`);  // Fetch each document's JSON file
+            const metadata = await response.json();  // Parse the JSON data
             
             // Create list item for the document
             const li = document.createElement('li');
             li.className = 'document-item';
             li.innerHTML = `
-                <h2><a href="detail.html?id=${doc.id}">${doc.title}</a></h2>
-                <p><strong>Published on:</strong> ${doc.date}</p>
-                <p>${doc.description}</p>
+                <h2><a href="detail.html?id=${metadata.id}">${metadata.title}</a></h2>
+                <p><strong>Published on:</strong> ${metadata.date}</p>
+                <p>${metadata.description}</p>
             `;
             documentList.appendChild(li);
         } catch (error) {
-            console.error(`Error fetching document${id}.json:`, error);
+            console.error(`Error fetching metadata${id}.json:`, error);
         }
     }
 }

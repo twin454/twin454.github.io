@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document Detail</title>
     <link rel="stylesheet" href="./styles.css">
+    <!-- Include the marked.js library to convert Markdown to HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
@@ -25,29 +27,36 @@
 // Fetch the document based on the ID from the URL query string
 async function fetchDocumentDetails() {
     const urlParams = new URLSearchParams(window.location.search);
-    const documentId = parseInt(urlParams.get('id'));
+    const docid = parseInt(urlParams.get('id'));
 
-    if (isNaN(documentId)) {
+    if (isNaN(docid)) {
         document.getElementById('documentDetail').innerHTML = "<p>Invalid document ID.</p>";
         return;
     }
 
     try {
-        const response = await fetch(`data/document${documentId}.json`);  // Fetch the specific document's JSON file
-        if (!response.ok) {
+        const response_metadata = await fetch(`data/metadata/${docid}.json`);  // Fetch the specific document's JSON file
+        if (!response_metadata.ok) {
+            throw new Error('Metadata not found');
+        }
+        const metadata = await response_metadata.json();  // Parse the JSON data
+
+        const response_doc = await fetch(`data/document/${docid}.md`);  // Fetch the specific document's Markdown (.md) file
+        if (!response_doc.ok) {
             throw new Error('Document not found');
         }
-        const doc = await response.json();  // Parse the JSON data
+        const doc_content = await response_doc.text();  // Parse the Markdown data
+
+        // Convert the Markdown content into HTML using marked.js
+        const htmlContent = marked.parse(doc_content);  // Convert Markdown to HTML
 
         // Render the document details
         const documentDetail = document.getElementById('documentDetail');
         documentDetail.innerHTML = `
-            <h2>${doc.title}</h2>
-            <p><strong>Published on:</strong> ${doc.date}</p>
-            <p><strong>Description:</strong> ${doc.description}</p>
+            <h2>${metadata.title}</h2>
+            <p><strong>Published on:</strong> ${metadata.date}</p>
             <div>
-                <h3>Content</h3>
-                <p>${doc.content}</p>
+                <div>${htmlContent}</div> <!-- Insert the converted HTML content -->
             </div>
         `;
     } catch (error) {
