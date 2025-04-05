@@ -44,7 +44,7 @@ async function displayRandomVerses() {
 
         const random_verse = Math.floor(Math.random() * catalog[random_book][random_chapter] + 1).toString();
         verse = await loadBibleVerse(random_book, random_chapter, random_verse);
-        if (!selectedVerses.includes(verse)) {
+        if (verse.trim() !== "" && !selectedVerses.includes(verse)) {
             selectedVerses.push(verse);
         }
     }
