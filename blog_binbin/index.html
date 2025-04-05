@@ -22,17 +22,31 @@
     <ul class="document-list" id="documentList">
         <!-- Document items will be displayed here -->
     </ul>
+
+    <!-- Pagination controls -->
+    <div class="pagination" id="paginationControls">
+        <button id="prevBtn" onclick="goToPreviousPage()">Previous</button>
+        <select id="pageSelect" onchange="goToPage(this.value)">
+            <!-- Options will be dynamically generated -->
+        </select>
+        <button id="nextBtn" onclick="goToNextPage()">Next</button>
+    </div>
 </main>
 
 <script>
+// Maximum number of documents
+const MAX_DOCUMENTS = 2;
+const DOCUMENTS_PER_PAGE = 5;
+let currentPage = 1;
+let totalPages = Math.ceil(MAX_DOCUMENTS / DOCUMENTS_PER_PAGE);
+
 // Fetch the document metadata dynamically from individual JSON files
 async function fetchDocuments() {
     const documentList = document.getElementById('documentList');
     documentList.innerHTML = '';  // Clear any existing content
-
-    const documentIds = [1, 2, 3, 4, 5, 6];  // List of document IDs (modify this as needed)
-    
-    for (const id of documentIds) {
+    const start_doc_id = MAX_DOCUMENTS - (currentPage - 1) * DOCUMENTS_PER_PAGE;
+    const end_doc_id =  Math.max(0, start_doc_id - DOCUMENTS_PER_PAGE);
+    for (let id = start_doc_id; id > end_doc_id; id--) {
         try {
             const response = await fetch(`data/metadata/${id}.json`);  // Fetch each document's JSON file
             const metadata = await response.json();  // Parse the JSON data
@@ -50,7 +64,55 @@ async function fetchDocuments() {
             console.error(`Error fetching metadata${id}.json:`, error);
         }
     }
+    updatePaginationButtons();
+    updatePageSelect();
 }
+
+// Update pagination buttons (Previous/Next)
+function updatePaginationButtons() {
+    document.getElementById('prevBtn').disabled = currentPage <= 1;
+    document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+}
+
+// Update page selection dropdown
+function updatePageSelect() {
+    const pageSelect = document.getElementById('pageSelect');
+    pageSelect.innerHTML = '';  // Clear existing options
+
+    // Create options for page selection dropdown
+    for (let i = 1; i <= totalPages; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = `Page ${i}`;
+        if (i === currentPage) {
+            option.selected = true;  // Mark the current page as selected
+        }
+        pageSelect.appendChild(option);
+    }
+}
+
+// Go to the previous page
+function goToPreviousPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        fetchDocuments();
+    }
+}
+
+// Go to the next page
+function goToNextPage() {
+    if (currentPage < totalPages) {
+        currentPage++;
+        fetchDocuments();
+    }
+}
+
+// Go to a specific page selected from the dropdown
+function goToPage(pageNumber) {
+    currentPage = parseInt(pageNumber);
+    fetchDocuments();
+}
+
 
 // Call the function to fetch and display the documents
 fetchDocuments();
