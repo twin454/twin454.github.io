@@ -147,3 +147,25 @@ main {
         font-size: 13px;
     }
 }
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.left-item {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.right-item {
+    font-size: 1.2em;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.right-item:hover {
+    text-decoration: underline;
+}
