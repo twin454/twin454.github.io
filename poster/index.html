@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Flyer Post</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.min.js"></script>
 </head>
 <body>
 
@@ -27,16 +28,29 @@
 
     <script>
         // Function to fetch the Markdown file and render it as HTML
-        function loadMarkdown() {
-            fetch('description/detail.md')
-                .then(response => response.text())
-                .then(data => {
-                    // Convert Markdown to HTML
-                    const htmlContent = marked(data);
-                    // Inject the HTML into the description container
-                    document.getElementById('description-container').innerHTML = htmlContent;
-                })
-                .catch(error => console.error('Error loading the Markdown file:', error));
+        async function loadMarkdown() {
+            try {
+                // Await the fetch and wait for the response
+                const response = await fetch(`description/detail.md`);
+                
+                // If the response is not okay, throw an error
+                if (!response.ok) {
+                    throw new Error('Failed to fetch the Markdown file');
+                }
+
+                // Await and get the text content of the response
+                const data = await response.text();
+
+                // Convert Markdown to HTML
+                const htmlContent = marked.parse(data);
+
+                // Inject the HTML into the description container
+                document.getElementById('description-container').innerHTML = htmlContent;
+            } catch (error) {
+                // Log error and display fallback message if fetching fails
+                console.error('Error loading the Markdown file:', error);
+                document.getElementById('description-container').innerHTML = '<p>Sorry, we couldn\'t load the event description. Please try again later.</p>';
+            }
         }
         window.onload = loadMarkdown;
     </script>
