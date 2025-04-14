@@ -1,0 +1,53 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Image Section */
+.header-image {
+    width: 100%; /* This ensures the image container spans the full width */
+    overflow: hidden; /* Keeps everything neatly inside */
+}
+
+.header-image-img {
+    width: 100%; /* The image will resize to the full width of the container */
+    height: auto; /* The height will adjust to maintain the image's aspect ratio */
+}
+
+/* Add some margin below the image to separate it from the description */
+.header-image + .description {
+    margin-top: 20px; /* Adds space between the image and description */
+}
+
+/* Description Section */
+.description {
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.description h1 {
+    color: #333;
+}
+
+.description p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Google Map */
+.map {
+    width: 100%;
+    height: 400px;
+    margin-top: 30px;
+}
