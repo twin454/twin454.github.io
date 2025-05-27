@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hire to fire</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
+<body>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Hire to Fire</h1>
+
+      <!-- Tabs -->
+      <div class="tabs is-toggle is-toggle-rounded is-fullwidth">
+        <ul id="tabs">
+          <li onclick="switchTab(this, 'tab1')" class="is-active"><a>Actions</a></li>
+          <li onclick="switchTab(this, 'tab2')"><a>Hiring week</a></li>
+          <li onclick="switchTab(this, 'tab3')"><a>Weekly meeting</a></li>
+          <li onclick="switchTab(this, 'tab4')"><a>Career goal</a></li>
+        </ul>
+      </div>
+
+      <!-- Tab content -->
+      <div id="tab-content">
+        <div id="tab1" class="content-tab">
+          <div class="content">
+            <h3>How to be a manager:</h3>
+            <ol type="1">
+              <li>Set your career goal.</li>
+              <li>Hire a employee.</li>
+              <li>Watch him working.</li>
+              <li>Meet your career goal.</li>
+              <li>If any accident happens, go back to step 2. &#129325;</li>
+            </ol>
+            <button class="button is-link">Start game</button>
+          </div>
+        </div>
+        <div id="tab2" class="content-tab is-hidden">
+          <div class="content">
+            <button class="button is-link">Reject</button>
+            <button class="button is-link">Hire</button>
+          </div>
+        </div>
+        <div id="tab3" class="content-tab is-hidden">
+          <div class="content">
+            <button class="button is-link">Next week</button>
+            <button class="button is-link">Fire and hire</button>
+          </div>
+        </div>
+        <div id="tab4" class="content-tab is-hidden">
+          <div class="content">
+            <h3>Pick your quaterly goal:</h3>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
