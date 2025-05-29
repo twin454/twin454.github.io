@@ -17,17 +17,17 @@
       <!-- Tabs -->
       <div class="tabs is-toggle is-toggle-rounded is-fullwidth">
         <ul id="tabs">
-          <li onclick="switchTab(this, 'tab1')" class="is-active"><a>Instruction</a></li>
-          <li onclick="switchTab(this, 'tab2')"><a>Hiring week</a></li>
-          <li onclick="switchTab(this, 'tab3')"><a>Weekly meeting</a></li>
-          <li onclick="switchTab(this, 'tab4')"><a>Career goal</a></li>
-          <li onclick="switchTab(this, 'tab5')"><a>Information</a></li>
+          <li onclick="switchTab(this, 'tab_instruction')" class="is-active"><a>Instruction</a></li>
+          <li onclick="switchTab(this, 'tab_hiring_week')"><a>Hiring week</a></li>
+          <li onclick="switchTab(this, 'tab_weekly_meeting')"><a>Weekly meeting</a></li>
+          <li onclick="switchTab(this, 'tab_career_goal')"><a>Career goal</a></li>
+          <li onclick="switchTab(this, 'tab_information')"><a>Information</a></li>
         </ul>
       </div>
 
       <!-- Tab content -->
       <div id="tab-content">
-        <div id="tab1" class="content-tab">
+        <div id="tab_instruction" class="content-tab">
           <div class="content">
             <h3>How to be a manager:</h3>
             <ol type="1">
@@ -40,10 +40,10 @@
             <button class="button is-link">Start game</button>
           </div>
         </div>
-        <div id="tab2" class="content-tab is-hidden">
+        <div id="tab_hiring_week" class="content-tab is-hidden">
           <div class="content">
             <figure class="image is-128x128">
-              <img src="./image/interview.jpg" alt="interview"/>
+              <img src="./image/interview.jpg" alt="interview" />
             </figure>
             <h3>Employee stats</h3>
             <table class="table is-bordered">
@@ -58,14 +58,14 @@
                 </tr>
               </thead>
               <tbody>
-                  <tr>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                  </tr>
+                <tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
               </tbody>
             </table>
 
@@ -73,36 +73,73 @@
             <button class="button is-link">Hire</button>
           </div>
         </div>
-        <div id="tab3" class="content-tab is-hidden">
+        <div id="tab_weekly_meeting" class="content-tab is-hidden">
           <div class="content">
             <figure class="image is-128x128">
-              <img src="./image/player.jpg" alt="player"/>
+              <img src="./image/player.jpg" alt="player" />
             </figure>
+
+            <table class="table is-bordered">
+              <thead>
+                <tr>
+                  <th class="is-link">Day</th>
+                  <th class="is-link">Productivity</th>
+                  <th class="is-link">Salary</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
+              </tbody>
+            </table>
 
             <button class="button is-link">Next week</button>
             <button class="button is-link">PUA</button>
             <button class="button is-link">Fire and hire</button>
           </div>
         </div>
-        <div id="tab4" class="content-tab is-hidden">
+        <div id="tab_career_goal" class="content-tab is-hidden">
           <div class="content">
             <div class="content">
               <figure class="image is-128x128">
-                <img src="./image/boss.jpg" alt="player"/>
+                <img src="./image/boss.jpg" alt="player" />
               </figure>
 
               <h3>Pick your quaterly goal.</h3>
               <table class="table is-bordered">
-              <thead>
-                <tr>
-                  <th class="is-link">Item</th>
-                  <th class="is-link">Workload</th>
-                  <th class="is-link">Skill</th>
-                  <th class="is-link">Bonus</th>
-                  <th class="is-link">Select</th>
-                </tr>
-              </thead>
-              <tbody>
+                <thead>
+                  <tr>
+                    <th class="is-link">Item</th>
+                    <th class="is-link">Workload</th>
+                    <th class="is-link">Skill</th>
+                    <th class="is-link">Bonus</th>
+                    <th class="is-link">Select</th>
+                  </tr>
+                </thead>
+                <tbody>
                   <tr>
                     <td>1</td>
                     <td>N/A</td>
@@ -138,15 +175,15 @@
                     <td>N/A</td>
                     <td><button class="button is-link">Select</button></td>
                   </tr>
-              </tbody>
-            </table>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <div id="tab5" class="content-tab is-hidden">
+        <div id="tab_information" class="content-tab is-hidden">
           <div class="content">
             <figure class="image is-128x128">
-              <img src="./image/player.jpg" alt="player"/>
+              <img src="./image/player.jpg" alt="player" />
             </figure>
             <h3>Employee stats</h3>
             <table class="table is-bordered">
@@ -161,14 +198,14 @@
                 </tr>
               </thead>
               <tbody>
-                  <tr>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                  </tr>
+                <tr>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
               </tbody>
             </table>
 
@@ -182,11 +219,11 @@
                 </tr>
               </thead>
               <tbody>
-                  <tr>
-                    <td>0/52</td>
-                    <td>N/A</td>
-                    <td>N/A</td>
-                  </tr>
+                <tr>
+                  <td>0/52</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
+                </tr>
               </tbody>
             </table>
           </div>
